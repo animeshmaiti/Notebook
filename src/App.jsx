@@ -4,6 +4,8 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import About from "./components/About";
+import Footer from "./components/Footer";
+import NoteState from "./context/notes/NoteState";
 
 function App() {
   const [myStyle, setMyStyle] = useState({
@@ -15,9 +17,13 @@ function App() {
     svg_style: "rgba(222, 226, 230, 0.75)",
   });
   useEffect(() => {
-    document.body.style.backgroundColor = myStyle.color === 'white' ? '#212529' : 'white';
-    document.body.style.color = myStyle.color === 'white' ? 'white' : '#212529';
-    document.documentElement.setAttribute("data-bs-theme", myStyle.color === 'white'? 'dark':'light');
+    document.body.style.backgroundColor =
+      myStyle.color === "white" ? "#212529" : "white";
+    document.body.style.color = myStyle.color === "white" ? "white" : "#212529";
+    document.documentElement.setAttribute(
+      "data-bs-theme",
+      myStyle.color === "white" ? "dark" : "light"
+    );
   }, [myStyle.color]);
 
   const toggleStyle = () => {
@@ -45,13 +51,16 @@ function App() {
   };
   return (
     <>
-    <Router>
-      <Navbar myTheme={myStyle} toggleStyle={toggleStyle} />
-      <Routes>
-        <Route exact path="/" element={<Home/>} />
-        <Route exact path="/about" element={<About/>} />
-      </Routes>
-    </Router>
+      <NoteState>
+        <Router>
+          <Navbar myTheme={myStyle} toggleStyle={toggleStyle} />
+          <Routes>
+            <Route exact path="/" element={<Home />} />
+            <Route exact path="/about" element={<About />} />
+          </Routes>
+          <Footer myTheme={myStyle} />
+        </Router>
+      </NoteState>
     </>
   );
 }
