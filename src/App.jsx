@@ -6,6 +6,7 @@ import Home from "./components/Home";
 import About from "./components/About";
 import Footer from "./components/Footer";
 import NoteState from "./context/notes/NoteState";
+import Alert from "./components/Alert";
 
 function App() {
   const [myStyle, setMyStyle] = useState({
@@ -54,6 +55,7 @@ function App() {
       <NoteState>
         <Router>
           <Navbar myTheme={myStyle} toggleStyle={toggleStyle} />
+          <Alert message="crud message"/>
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route exact path="/about" element={<About />} />
