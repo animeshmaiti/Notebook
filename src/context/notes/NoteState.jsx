@@ -29,19 +29,21 @@ const NoteState = (props) => {
       },
       body: JSON.stringify({ title, description, tag }),
     });
-    const result = response.json();
-    const note = {
-      _id: "659799073ed6e9a5de55cb4d",
-      user: "65956f90c7b3990e806eefa1",
-      title: title,
-      description: description,
-      tag: tag,
-      date: "2024-01-05T05:52:07.065Z",
-      __v: 0,
-    };
-    setNotes(notes.concat(note));
+    const result = await response.json();
+    setNotes(notes.concat(result));
   };
-  const deleteNote = (id) => {
+  const deleteNote = async (id) => {
+    const response = await fetch(`${host}/api/notes/deletenote/${id}`, {
+      method: "DELETE",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token":
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU5NTZmOTBjN2IzOTkwZTgwNmVlZmExIn0sImlhdCI6MTcwNDM3NTkzMH0.eWfsTFPd5xQD02a3SBTRcUh1mUwBPs5cFimCkfgQNWs",
+      },
+    });
+    const result = response.json();
+    console.log(result);
     const newNotes = notes.filter((note) => {
       return note._id !== id;
     });
@@ -58,15 +60,18 @@ const NoteState = (props) => {
       },
       body: JSON.stringify({ title, description, tag }),
     });
-    const result = response.json();
-    for (let index = 0; index < notes.length; index++) {
-      const element = notes[index];
+    const result = await response.json();
+    let newNotes = JSON.parse(JSON.stringify(notes))
+    console.log(result);
+    for (let index = 0; index < newNotes.length; index++) {
+      const element = newNotes[index];
       if (element._id === id) {
-        element.title = title;
-        element.description = description;
-        element.tag = tag;
+        newNotes[index].title = title;
+        newNotes[index].description = description;
+        newNotes[index].tag = tag;
       }
     }
+    setNotes(newNotes);
   };
   return (
     <NoteContext.Provider

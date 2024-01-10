@@ -8,6 +8,7 @@ function AddNote() {
   const handleAddNote = (e) => {
     e.preventDefault();
     addNote(note.title,note.description,note.tag);
+    setNote({title: "", description: "", tag: ""});
   };
   const onChange = (e) => {
     setNote({ ...note, [e.target.name]: e.target.value });
@@ -17,7 +18,7 @@ function AddNote() {
       <h2>Add Notes</h2>
       <form>
         <div className="mb-3">
-          <label htmlFor="exampleInputEmail1" className="form-label">
+          <label htmlFor="title" className="form-label">
             Title
           </label>
           <input
@@ -26,6 +27,7 @@ function AddNote() {
             id="title"
             name="title"
             onChange={onChange}
+            value={note.title}
           />
           <div className="form-text">give a title</div>
         </div>
@@ -40,6 +42,7 @@ function AddNote() {
             className="form-control"
             placeholder="Write a description"
             id="description"
+            value={note.description}
           ></textarea>
         </div>
         <div className="mb-3">
@@ -52,6 +55,7 @@ function AddNote() {
             id="tag"
             name="tag"
             onChange={onChange}
+            value={note.tag}
           />
           <div className="form-text">Add a tag optional</div>
         </div>
