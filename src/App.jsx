@@ -7,6 +7,8 @@ import About from "./components/About";
 import Footer from "./components/Footer";
 import NoteState from "./context/notes/NoteState";
 import Alert from "./components/Alert";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
 
 function App() {
   const [myStyle, setMyStyle] = useState({
@@ -59,6 +61,8 @@ function App() {
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route exact path="/about" element={<About />} />
+            <Route exact path="/login" element={<Login />} />
+            <Route exact path="/signup" element={<Signup />} />
           </Routes>
           <Footer myTheme={myStyle} />
         </Router>

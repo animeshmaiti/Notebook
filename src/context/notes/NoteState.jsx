@@ -42,7 +42,7 @@ const NoteState = (props) => {
           "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU5NTZmOTBjN2IzOTkwZTgwNmVlZmExIn0sImlhdCI6MTcwNDM3NTkzMH0.eWfsTFPd5xQD02a3SBTRcUh1mUwBPs5cFimCkfgQNWs",
       },
     });
-    const result = response.json();
+    const result = await response.json();
     console.log(result);
     const newNotes = notes.filter((note) => {
       return note._id !== id;
@@ -69,6 +69,7 @@ const NoteState = (props) => {
         newNotes[index].title = title;
         newNotes[index].description = description;
         newNotes[index].tag = tag;
+        break;
       }
     }
     setNotes(newNotes);

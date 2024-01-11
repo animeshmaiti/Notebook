@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink,Link } from "react-router-dom";
 
 function Navbar(props) {
   const navStyle = props.myTheme;
@@ -35,7 +35,7 @@ function Navbar(props) {
                 </NavLink>
               </li>
             </ul>
-            <div className="form-check form-switch">
+            <div className="form-check form-switch mx-2">
               <input
                 className="form-check-input"
                 type="checkbox"
@@ -45,7 +45,9 @@ function Navbar(props) {
               />
               <label htmlFor="theme">{navStyle.btnText}</label>
             </div>
-            <form className="d-flex" role="search">
+            <Link className="btn btn-primary mx-1" to="/login" role="button" >Login</Link>
+            <Link className="btn btn-primary mx-1" to="/signup" role="button" >Sign Up</Link>
+            {/* <form className="d-flex" role="search">
               <input
                 className="form-control me-2"
                 type="search"
@@ -55,7 +57,7 @@ function Navbar(props) {
               <button className="btn btn-outline-success" type="submit">
                 Search
               </button>
-            </form>
+            </form> */}
           </div>
         </div>
       </nav>
