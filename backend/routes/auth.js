@@ -14,6 +14,7 @@ router.post('/createuser', [
     body('email', 'enter a valid email').isEmail(),
     body('password', 'enter a valid password').isLength({ min: 5 })
 ], async (req, res) => {
+    // const expire_time = Math.floor(Date.now() / 1000) + 60;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
@@ -35,7 +36,8 @@ router.post('/createuser', [
                 id: user.id
             }
         }
-        const authToken = jwt.sign(data, JWT_SECRET)
+        // const authToken = jwt.sign({ data, exp: expire_time }, JWT_SECRET);
+        const authToken = jwt.sign(data, JWT_SECRET);
 
         res.json({ authToken });
     } catch (error) {
@@ -49,7 +51,8 @@ router.post('/login', [
     body('email', 'enter a valid email').isEmail(),
     body('password', 'password cannot be blank').exists(),
 ], async (req, res) => {
-    let success=false;
+    let success = false;
+    // const expire_time = Math.floor(Date.now() / 1000) + 60;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
@@ -58,19 +61,20 @@ router.post('/login', [
     try {
         let user = await User.findOne({ email });
         if (!user) {
-            success= false;
-            return res.status(400).json({success, errors: "pls login with correct credentials" });
+            success = false;
+            return res.status(400).json({ success, errors: "pls login with correct credentials" });
         }
-        const compPass =await bcrypt.compare(password, user.password);
+        const compPass = await bcrypt.compare(password, user.password);
         if (!compPass) {
-            success=false;
-            return res.status(400).json({success, errors: "pls login with correct credentials" });
+            success = false;
+            return res.status(400).json({ success, errors: "pls login with correct credentials" });
         }
         const data = {
             user: {
                 id: user.id
             }
         }
+        // const authToken = jwt.sign({ data, exp: expire_time }, JWT_SECRET)
         const authToken = jwt.sign(data, JWT_SECRET)
         success=true
         res.json({success,authToken });
@@ -81,9 +85,9 @@ router.post('/login', [
 });
 
 //============ get logged in user details (Login required) ==============
-router.post('/getuser',fetchuser,async (req,res)=>{
+router.post('/getuser', fetchuser, async (req, res) => {
     try {
-        const userId=req.user.id;
+        const userId = req.user.id;
         const user = await User.findById(userId).select("-password");
         res.send(user);
     } catch (error) {

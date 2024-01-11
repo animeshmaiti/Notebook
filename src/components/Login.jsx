@@ -22,7 +22,7 @@ function Login() {
       localStorage.setItem("token", result.authToken);
       navigate("/");
     }
-    console.log(result);
+    console.log(result.authToken);
   };
   const onChange = (e) => {
     setCredential({ ...credential, [e.target.name]: e.target.value });
