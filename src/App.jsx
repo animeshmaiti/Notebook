@@ -69,10 +69,14 @@ function App() {
           <Navbar myTheme={myStyle} toggleStyle={toggleStyle} />
           <Alert alert={alert} />
           <Routes>
-            <Route exact path="/" element={<Home alert={showAlert}/>} />
+            <Route exact path="/" element={localStorage.getItem('token')?<Home alert={showAlert} />:<Login alert={showAlert} />} />
             <Route exact path="/about" element={<About />} />
             <Route exact path="/login" element={<Login alert={showAlert} />} />
-            <Route exact path="/signup" element={<Signup alert={showAlert}/>} />
+            <Route
+              exact
+              path="/signup"
+              element={<Signup alert={showAlert} />}
+            />
           </Routes>
           <Footer myTheme={myStyle} />
         </Router>

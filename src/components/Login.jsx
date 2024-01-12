@@ -33,6 +33,7 @@ function Login(props) {
   };
   return (
     <div className="container vh-100">
+      <h2>Login to Notebook</h2>
       <form onSubmit={handleLogin}>
         <div className="mb-3">
           <label htmlFor="email" className="form-label">

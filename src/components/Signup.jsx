@@ -33,6 +33,7 @@ function Signup(props) {
   };
   return (
     <div className="container vh-100">
+      <h2>Sign up to Notebook</h2>
       <form onSubmit={handleCreateUser}>
       <div className="mb-3">
           <label htmlFor="username" className="form-label">
