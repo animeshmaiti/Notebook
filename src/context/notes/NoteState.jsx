@@ -4,6 +4,7 @@ import NoteContext from "./noteContext";
 const NoteState = (props) => {
   const initialNotes = [];
   const [notes, setNotes] = useState(initialNotes);
+  const token = localStorage.getItem("token");
   const host = "http://localhost:5000";
   const getAllNotes = async () => {
     const response = await fetch(`${host}/api/notes/fetchnotes`, {
@@ -11,8 +12,7 @@ const NoteState = (props) => {
       mode: "cors",
       headers: {
         "Content-Type": "application/json",
-        "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU5NTZmOTBjN2IzOTkwZTgwNmVlZmExIn0sImlhdCI6MTcwNDM3NTkzMH0.eWfsTFPd5xQD02a3SBTRcUh1mUwBPs5cFimCkfgQNWs",
+        "auth-token": token,
       },
     });
     const allNotes = await response.json();
@@ -24,8 +24,7 @@ const NoteState = (props) => {
       mode: "cors",
       headers: {
         "Content-Type": "application/json",
-        "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU5NTZmOTBjN2IzOTkwZTgwNmVlZmExIn0sImlhdCI6MTcwNDM3NTkzMH0.eWfsTFPd5xQD02a3SBTRcUh1mUwBPs5cFimCkfgQNWs",
+        "auth-token": token,
       },
       body: JSON.stringify({ title, description, tag }),
     });
@@ -38,8 +37,7 @@ const NoteState = (props) => {
       mode: "cors",
       headers: {
         "Content-Type": "application/json",
-        "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU5NTZmOTBjN2IzOTkwZTgwNmVlZmExIn0sImlhdCI6MTcwNDM3NTkzMH0.eWfsTFPd5xQD02a3SBTRcUh1mUwBPs5cFimCkfgQNWs",
+        "auth-token": token,
       },
     });
     const result = await response.json();
@@ -55,13 +53,12 @@ const NoteState = (props) => {
       mode: "cors",
       headers: {
         "Content-Type": "application/json",
-        "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU5NTZmOTBjN2IzOTkwZTgwNmVlZmExIn0sImlhdCI6MTcwNDM3NTkzMH0.eWfsTFPd5xQD02a3SBTRcUh1mUwBPs5cFimCkfgQNWs",
+        "auth-token": token,
       },
       body: JSON.stringify({ title, description, tag }),
     });
     const result = await response.json();
-    let newNotes = JSON.parse(JSON.stringify(notes))
+    let newNotes = JSON.parse(JSON.stringify(notes));
     console.log(result);
     for (let index = 0; index < newNotes.length; index++) {
       const element = newNotes[index];

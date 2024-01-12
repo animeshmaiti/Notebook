@@ -52,17 +52,27 @@ function App() {
       });
     }
   };
+  const [alert, setAlert] = useState(null);
+  const showAlert = (type, massage) => {
+    setAlert({
+      msg: massage,
+      type: type,
+    });
+    setTimeout(() => {
+      setAlert(null);
+    }, 1000);
+  };
   return (
     <>
       <NoteState>
         <Router>
           <Navbar myTheme={myStyle} toggleStyle={toggleStyle} />
-          <Alert message="crud message"/>
+          <Alert alert={alert} />
           <Routes>
-            <Route exact path="/" element={<Home />} />
+            <Route exact path="/" element={<Home alert={showAlert}/>} />
             <Route exact path="/about" element={<About />} />
-            <Route exact path="/login" element={<Login />} />
-            <Route exact path="/signup" element={<Signup />} />
+            <Route exact path="/login" element={<Login alert={showAlert} />} />
+            <Route exact path="/signup" element={<Signup alert={showAlert}/>} />
           </Routes>
           <Footer myTheme={myStyle} />
         </Router>

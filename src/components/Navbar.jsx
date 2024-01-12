@@ -1,9 +1,14 @@
 import React from "react";
-import { NavLink,Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 
 function Navbar(props) {
   const navStyle = props.myTheme;
   const toggleBtn = props.toggleStyle;
+  const navigate=useNavigate();
+  const handleLogOut=()=>{
+    localStorage.removeItem('token');
+    navigate('/login');
+  }
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -45,8 +50,14 @@ function Navbar(props) {
               />
               <label htmlFor="theme">{navStyle.btnText}</label>
             </div>
-            <Link className="btn btn-primary mx-1" to="/login" role="button" >Login</Link>
-            <Link className="btn btn-primary mx-1" to="/signup" role="button" >Sign Up</Link>
+            {!localStorage.getItem('token')? <div>
+              <Link className="btn btn-primary mx-1" to="/login" role="button">
+                Login
+              </Link>
+              <Link className="btn btn-primary mx-1" to="/signup" role="button">
+                Sign Up
+              </Link>
+            </div> : <button onClick={handleLogOut} className="btn btn-primary">Logout</button>}
             {/* <form className="d-flex" role="search">
               <input
                 className="form-control me-2"
