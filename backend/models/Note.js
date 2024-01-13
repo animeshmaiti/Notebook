@@ -1,6 +1,7 @@
 const mongoose= require("mongoose");
 const { Schema } = mongoose;
 
+// Mongoose.Schema.Types.ObjectId is a special schema type used by Mongoose for storing unique values
 const noteSchema = new Schema({
     user:{
         type:mongoose.Schema.Types.ObjectId,

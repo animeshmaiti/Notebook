@@ -24,13 +24,13 @@ function Footer(props) {
           >
             <div className="col-md-4 d-flex align-items-center">
               <span className="mb-3 mb-md-0 text-body-secondary">
-                &copy; 2023 TextUtils, Animesh
+                &copy; 2023 NoteBook, Animesh
               </span>
             </div>
   
             <ul className="nav col-md-4 justify-content-end list-unstyled d-flex">
               <li className="ms-3">
-                <a className="text-body-secondary" href="https://github.com/animeshmaiti/News-App" target="_blank" rel="noopener noreferrer">
+                <a className="text-body-secondary" href="https://github.com/animeshmaiti/Notebook.git" target="_blank" rel="noopener noreferrer">
                   <svg className="bi" width="24" height="24" fill={props.myTheme.svg_style}>
                     <use xlinkHref="#gitHub"/>
                   </svg>
